@@ -48,6 +48,8 @@ defmodule Twix.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
+      {:absinthe, "~> 1.7"},
+      {:absinthe_plug, "~> 1.5"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:sobelow, "~> 0.8", only: :dev},
