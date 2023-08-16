@@ -7,6 +7,7 @@ defmodule TwixWeb.Schema.Types.Root do
   import_types TwixWeb.Schema.Types.Post
   import_types TwixWeb.Schema.Types.User
 
+  @desc "Root query"
   object :root_query do
     field :user, type: :user do
       arg :id, non_null(:id)
@@ -16,6 +17,7 @@ defmodule TwixWeb.Schema.Types.Root do
     end
   end
 
+  @desc "Root mutation"
   object :root_mutation do
     field :create_user, type: :user do
       arg :input, non_null(:create_user_input)
