@@ -46,5 +46,12 @@ defmodule TwixWeb.Schema.Types.Root do
       resolve &UserResolver.update/2
       middleware TranslateErrors
     end
+
+    field :add_follower, type: :add_follower_response do
+      arg :input, non_null(:add_follower_input)
+
+      resolve &UserResolver.add_follower/2
+      middleware TranslateErrors
+    end
   end
 end
