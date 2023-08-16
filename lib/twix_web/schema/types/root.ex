@@ -31,6 +31,13 @@ defmodule TwixWeb.Schema.Types.Root do
       middleware TranslateErrors
     end
 
+    field :add_like_to_post, type: :post do
+      arg :id, non_null(:id)
+
+      resolve &PostResolver.add_like/2
+      middleware TranslateErrors
+    end
+
     field :update_user, type: :user do
       arg :input, non_null(:update_user_input)
 
