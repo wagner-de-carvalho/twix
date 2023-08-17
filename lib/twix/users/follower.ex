@@ -4,7 +4,7 @@ defmodule Twix.Users.Follower do
 
   alias Twix.Users.User
 
-  @required_params ~w/follower_id following_id/a
+  @required_params ~w/following_id follower_id/a
 
   @primary_key false
   schema "followers" do
