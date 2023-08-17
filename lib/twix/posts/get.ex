@@ -11,6 +11,6 @@ defmodule Twix.Posts.Get do
         offset: (^page - 1) * ^per_page,
         limit: ^per_page
 
-    Repo.all(posts_query)
+    {:ok, Repo.all(posts_query)}
   end
 end
