@@ -55,10 +55,10 @@ defmodule TwixWeb.Schema.Types.Root do
     end
   end
 
-   @desc "Root Subscription"
-   object :root_subscription do
+  @desc "Root Subscription"
+  object :root_subscription do
     field :new_follow, :add_follower_response do
       config fn _args, _context -> {:ok, topic: "new_follow_topic"} end
     end
-   end
+  end
 end
