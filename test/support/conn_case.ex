@@ -31,7 +31,6 @@ defmodule TwixWeb.ConnCase do
       import Phoenix.ConnTest
       import TwixWeb.ConnCase
       import Phoenix.ChannelTest
-      import TwixWeb.ChannelCase
 
       setup tags do
         {:ok, socket} = Phoenix.ChannelTest.connect(TwixWeb.TwixSocket, %{})
