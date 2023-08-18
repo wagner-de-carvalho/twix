@@ -14,6 +14,7 @@ defmodule TwixWeb.ConnCase do
   by setting `use TwixWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
+  require Phoenix.ChannelTest
 
   use ExUnit.CaseTemplate
 
@@ -23,16 +24,22 @@ defmodule TwixWeb.ConnCase do
       @endpoint TwixWeb.Endpoint
 
       use TwixWeb, :verified_routes
+      use Absinthe.Phoenix.SubscriptionTest, schema: TwixWeb.Schema
 
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import TwixWeb.ConnCase
-    end
-  end
+      import Phoenix.ChannelTest
+      import TwixWeb.ChannelCase
 
-  setup tags do
-    Twix.DataCase.setup_sandbox(tags)
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+      setup tags do
+        {:ok, socket} = Phoenix.ChannelTest.connect(TwixWeb.TwixSocket, %{})
+        {:ok, socket} = Absinthe.Phoenix.SubscriptionTest.join_absinthe(socket)
+
+        Twix.DataCase.setup_sandbox(tags)
+        {:ok, conn: Phoenix.ConnTest.build_conn(), socket: socket}
+      end
+    end
   end
 end
