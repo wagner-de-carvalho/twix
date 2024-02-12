@@ -5,6 +5,7 @@ defmodule Twix.Users.User do
   alias Twix.Posts.Post
 
   @required_params ~w/age email nickname/a
+  @update_required_params ~w/id/a
 
   schema "users" do
     field :age, :integer, default: 0
@@ -13,6 +14,16 @@ defmodule Twix.Users.User do
 
     has_many :posts, Post
     timestamps()
+  end
+
+  def update_changeset(user \\ %__MODULE__{}, params) do
+    user
+    |> cast(params, @required_params)
+    |> validate_required(@update_required_params)
+    |> validate_length(:nickname, min: 2)
+    |> validate_number(:age, greater_than_or_equal_to: 18)
+    |> unique_constraint(:nickname)
+    |> unique_constraint(:email)
   end
 
   def changeset(user \\ %__MODULE__{}, params) do

@@ -22,5 +22,11 @@ defmodule TwixWeb.Schema.Types.Root do
 
       resolve &UserResolver.create/2
     end
+
+    field :update_user, type: :user do
+      arg :input, non_null(:update_user_input)
+
+      resolve &UserResolver.update/2
+    end
   end
 end

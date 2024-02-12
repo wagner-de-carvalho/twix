@@ -14,7 +14,7 @@ defmodule Twix.Users.Update do
 
   defp update(user, params) do
     user
-    |> User.changeset(params)
+    |> User.update_changeset(params)
     |> Repo.update()
   end
 end
