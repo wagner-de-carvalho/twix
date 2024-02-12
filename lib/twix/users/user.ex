@@ -4,7 +4,7 @@ defmodule Twix.Users.User do
   import Ecto.Changeset
   alias Twix.Posts.Post
 
-  @required_params ~w/text user_id email nickname/a
+  @required_params ~w/age email nickname/a
 
   schema "users" do
     field :age, :integer, default: 0
