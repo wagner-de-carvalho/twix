@@ -5,6 +5,7 @@ defmodule Twix.MixProject do
     [
       app: :twix,
       version: "0.1.0",
+      description: " A simple GraphQL API",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -41,7 +42,9 @@ defmodule Twix.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:absinthe, "~> 1.7"},
+      {:absinthe_plug, "~> 1.5"}
     ]
   end
 
