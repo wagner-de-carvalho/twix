@@ -2,6 +2,7 @@ defmodule Twix.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
+  alias TwixWeb.TwixSocket
 
   use Application
 
@@ -15,7 +16,9 @@ defmodule Twix.Application do
       # Start a worker by calling: Twix.Worker.start_link(arg)
       # {Twix.Worker, arg},
       # Start to serve requests, typically the last entry
-      TwixWeb.Endpoint
+      TwixWeb.Endpoint,
+      # Subscription socket (Absinthe GraphQL lib)
+      {Absinthe.Subscription, TwixWeb.Endpoint}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
