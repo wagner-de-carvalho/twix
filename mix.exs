@@ -5,7 +5,7 @@ defmodule Twix.MixProject do
     [
       app: :twix,
       version: "0.1.0",
-      description: " A simple GraphQL API",
+      description: "A simple social network implementation GraphQL API",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
