@@ -40,5 +40,11 @@ defmodule TwixWeb.Schema.Types.Root do
       resolve &PostResolver.create/2
       middleware TranslateErrors
     end
+
+    field :add_like_to_post, type: :post do
+      arg :id, non_null(:id)
+
+      resolve &PostResolver.add_like/2
+    end
   end
 end
