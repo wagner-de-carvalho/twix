@@ -1,5 +1,11 @@
 # Twix
-A simple social network implementation. You can add users, add followers, follow an user, show users, create posts, add likes to posts.
+A simple social network implementation. You can:
+- create users;
+- add followers;
+- follow an user, 
+- show users;
+- create posts;
+- add likes to posts.
 
 ### To start your Phoenix server:
 
