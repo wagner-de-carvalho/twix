@@ -8,6 +8,8 @@ defmodule TwixWeb.Schema.Types.User do
     field :age, non_null(:integer), description: "Must be greater than or equal to 18"
     field :email, non_null(:string), description: "Valid e-mail"
     field :posts, list_of(:post), description: "A list of posts"
+    field :followers, list_of(:follower), description: "A list of followers"
+    field :followings, list_of(:following), description: "A list of followings"
   end
 
   @desc "Required params to create a new user"
@@ -23,5 +25,25 @@ defmodule TwixWeb.Schema.Types.User do
     field :nickname, :string, description: "A valid nickname"
     field :age, :integer, description: "Must be greater than or equal to 18"
     field :email, :string, description: "Valid e-mail"
+  end
+
+  object :follower do
+    field :follower_id, non_null(:id), description: "Follower ID"
+    field :follower, non_null(:user), description: "Follower user"
+  end
+
+  object :add_follower_response do
+    field :follower_id, non_null(:id), description: "Follower ID"
+    field :following_id, non_null(:id), description: "Following ID"
+  end
+
+  input_object :add_follower_input do
+    field :user_id, non_null(:id), description: "Following ID"
+    field :follower_id, non_null(:id), description: "Follower ID"
+  end
+
+  object :following do
+    field :following_id, non_null(:id), description: "Following ID"
+    field :following, non_null(:user), description: "Following user"
   end
 end
