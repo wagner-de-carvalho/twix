@@ -3,6 +3,7 @@ defmodule Twix.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Twix.Posts.Post
+  alias Twix.Users.Follower
 
   @required_params ~w/age email nickname/a
   @update_required_params ~w/id/a
@@ -13,6 +14,9 @@ defmodule Twix.Users.User do
     field :nickname, :string
 
     has_many :posts, Post
+    has_many :followers, Follower, foreign_key: :following_id
+    has_many :followings, Follower, foreign_key: :follower_id
+
     timestamps()
   end
 
