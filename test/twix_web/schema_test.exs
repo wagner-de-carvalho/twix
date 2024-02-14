@@ -100,7 +100,7 @@ defmodule TwixWeb.SchemaTest do
 
       # Subscription setup
       socket_ref = push_doc(socket, subscription)
-      assert_reply socket_ref, :ok, %{subscriptionId: _subscription_id}
+      assert_reply socket_ref, :ok, %{subscriptionId: subscription_id}
       # Subscription setup end
 
       # Mutation setup
@@ -109,19 +109,23 @@ defmodule TwixWeb.SchemaTest do
       # Mutation setup end
 
       # Mutation assertion
-      assert %{
+      assert mutation_response == %{
                data: %{
-                 "addFollower" => %{"followerId" => _follower_id, "followingId" => _following_id}
+                 "addFollower" => %{"followerId" => "#{user2.id}", "followingId" => "#{user1.id}"}
                }
-             } = mutation_response
+             }
 
       # Subscription assertion
       assert_push "subscription:data", subscription_response
 
-      assert %{
-               result: %{data: %{"newFollow" => %{"followerId" => _, "followingId" => _}}},
-               subscriptionId: _subscription_id
-             } = subscription_response
+      assert subscription_response == %{
+               result: %{
+                 data: %{
+                   "newFollow" => %{"followerId" => "#{user2.id}", "followingId" => "#{user1.id}"}
+                 }
+               },
+               subscriptionId: subscription_id
+             }
     end
   end
 end
