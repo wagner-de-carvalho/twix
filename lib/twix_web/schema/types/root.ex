@@ -3,6 +3,8 @@ defmodule TwixWeb.Schema.Types.Root do
   import_types TwixWeb.Schema.Types.Post
   import_types TwixWeb.Schema.Types.User
   alias Crudry.Middlewares.TranslateErrors
+  alias Twix.Repo
+  alias Twix.Users.User
   alias TwixWeb.Resolvers.Post, as: PostResolver
   alias TwixWeb.Resolvers.User, as: UserResolver
 
@@ -16,6 +18,12 @@ defmodule TwixWeb.Schema.Types.Root do
       # Works like a controller
       # Gets the param and executes a function
       resolve &UserResolver.get/2
+    end
+
+    field :users, type: list_of(:user) do
+      resolve fn _args, _context ->
+        {:ok, Repo.all(User)}
+      end
     end
   end
 
