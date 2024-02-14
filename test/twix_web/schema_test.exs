@@ -72,8 +72,56 @@ defmodule TwixWeb.SchemaTest do
     end
   end
 
-  # describe "users subscription" do
-  #   test "", %{conn: conn} do
-  #   end
-  # end
+  describe "subscriptions" do
+    test "new follow", %{socket: socket} do
+      user_params1 = %{nickname: "josé", age: 35, email: "josevalim@mail.com"}
+      {:ok, user1} = Twix.create_user(user_params1)
+
+      user_params2 = %{nickname: "acme", age: 55, email: "acmecompany@mail.com"}
+      {:ok, user2} = Twix.create_user(user_params2)
+
+      mutation = """
+      mutation {
+          addFollower(input: {userId: #{user1.id}, followerId: #{user2.id}}) {
+          followerId
+          followingId
+        }
+      }
+      """
+
+      subscription = """
+      subscription {
+          newFollow {
+          followerId
+          followingId
+        }
+      }
+      """
+
+      # Subscription setup
+      socket_ref = push_doc(socket, subscription)
+      assert_reply socket_ref, :ok, %{subscriptionId: _subscription_id}
+      # Subscription setup end
+
+      # Mutation setup
+      socket_ref = push_doc(socket, mutation)
+      assert_reply socket_ref, :ok, mutation_response
+      # Mutation setup end
+
+      # Mutation assertion
+      assert %{
+               data: %{
+                 "addFollower" => %{"followerId" => _follower_id, "followingId" => _following_id}
+               }
+             } = mutation_response
+
+      # Subscription assertion
+      assert_push "subscription:data", subscription_response
+
+      assert %{
+               result: %{data: %{"newFollow" => %{"followerId" => _, "followingId" => _}}},
+               subscriptionId: _subscription_id
+             } = subscription_response
+    end
+  end
 end
