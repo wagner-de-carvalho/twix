@@ -71,4 +71,9 @@ defmodule TwixWeb.SchemaTest do
       assert %{"data" => %{"createUser" => %{"id" => _id, "nickname" => "josé"}}} = response
     end
   end
+
+  # describe "users subscription" do
+  #   test "", %{conn: conn} do
+  #   end
+  # end
 end
