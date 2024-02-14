@@ -59,6 +59,7 @@ defmodule TwixWeb.Schema.Types.Root do
         {:ok, topic: "new_follow_topic"}
       end
 
+      # Trigger
       trigger :add_follower, topic: fn _context -> ["new_follow_topic"] end
     end
   end
