@@ -7,6 +7,6 @@ defmodule Twix.Repo.Migrations.CreateFollowers do
       add :following_id, references(:users, on_delete: :delete_all)
     end
 
-    create unique_index(:followers, [:following_id, :follower_id])
+    create unique_index(:followers, [:follower_id, :following_id])
   end
 end
