@@ -55,4 +55,12 @@ defmodule TwixWeb.Schema.Types.Root do
       resolve &PostResolver.add_like/2
     end
   end
+
+  object :root_subscription do
+    field :new_follow, :add_follower_response do
+      config fn _args, _context ->
+        {:ok, topic: "new_follow_topic"}
+      end
+    end
+  end
 end
