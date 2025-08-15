@@ -1,5 +1,6 @@
 defmodule TwixWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :twix
+  use Absinthe.Phoenix.Endpoint
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -10,6 +11,9 @@ defmodule TwixWeb.Endpoint do
     signing_salt: "/3EzfYym",
     same_site: "Lax"
   ]
+
+  # Socket for Absinthe subscriptions
+  socket "/socket", TwixWeb.TwixSocket, websocket: true, longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket,
     websocket: [connect_info: [session: @session_options]],

@@ -21,3 +21,6 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 - root query e root mutation = equivalente ao arquivo 'router' em REST API.
 - resolvers = equivalente aos 'controllers' em REST API.
 - schema = importa 'query' e 'mutation'.
+
+### Gerar socket
+- mix phx.gen.socket my_socket = cria um socket.

@@ -15,7 +15,8 @@ defmodule Twix.Application do
       # Start a worker by calling: Twix.Worker.start_link(arg)
       # {Twix.Worker, arg},
       # Start to serve requests, typically the last entry
-      TwixWeb.Endpoint
+      TwixWeb.Endpoint,
+      {Absinthe.Subscription, TwixWeb.Endpoint}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
