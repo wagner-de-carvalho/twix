@@ -25,6 +25,22 @@ defmodule TwixWeb.Schema.Types.Root do
       middleware TranslateErrors
     end
 
+    field :update_user, type: :user do
+      arg :input, non_null(:update_user_input)
+
+      resolve &UserResolver.update/2
+
+      middleware TranslateErrors
+    end
+
+    field :add_follower, type: :add_follower_response do
+      arg :input, non_null(:add_follower_input)
+
+      resolve &UserResolver.add_follower/2
+
+      middleware TranslateErrors
+    end
+
     field :create_post, type: :post do
       arg :input, non_null(:create_post_input)
 
@@ -37,14 +53,6 @@ defmodule TwixWeb.Schema.Types.Root do
       arg :id, non_null(:id)
 
       resolve &PostResolver.add_like/2
-    end
-
-    field :update_user, type: :user do
-      arg :input, non_null(:update_user_input)
-
-      resolve &UserResolver.update/2
-
-      middleware TranslateErrors
     end
   end
 end
